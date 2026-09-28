@@ -153,8 +153,17 @@
   </div>
 </div>
 
-<script type="importmap">
-{ "imports": { "three": "./vendor/three.module.js" } }
+<div id="boot-tip" style="display:none; position:fixed; left:50%; bottom:12px; transform:translateX(-50%); z-index:99; color:#fff; background:rgba(0,0,0,.7); padding:8px 16px; border-radius:6px; font-size:13px;"></div>
+<script>
+  // 白屏兜底：5 秒还没启动就给出提示（区分加载慢/网络/浏览器不支持）
+  setTimeout(() => {
+    const g = window.__game;
+    if (!g || !g.started) {
+      const tip = document.getElementById('boot-tip');
+      tip.style.display = 'block';
+      tip.textContent = '加载较慢或失败：请检查网络（本站需要能访问 github.io），或换 Chrome/Edge 新版浏览器后刷新';
+    }
+  }, 5000);
 </script>
 <script type="module" src="./src/main.js"></script>
 </body>
